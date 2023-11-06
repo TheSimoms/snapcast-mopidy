@@ -1,21 +1,13 @@
 FROM alpine:latest
 
-RUN apk --update --no-cache add snapcast-server
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 
-RUN mkdir -p /home/snapserver && \
-    addgroup -S snapserver && \
-    adduser -S snapserver -G snapserver --disabled-password -h /home/snapserver && \
-    chown snapserver:snapserver -R /home/snapserver
-
-WORKDIR /home/snapserver
-
-USER snapserver
+RUN apk --update --no-cache add snapcast-server librespot
 
 EXPOSE 1704
 EXPOSE 1705
 EXPOSE 1780
 
-VOLUME [ "/home/snapserver" ]
-VOLUME [ "/tmp" ]
+VOLUME [ "/etc/snapcast" ]
 
-ENTRYPOINT [ "snapserver", "--config", "/home/snapserver/snapserver.conf" ]
+ENTRYPOINT [ "snapserver", "--config", "/etc/snapcast/snapserver.conf" ]
