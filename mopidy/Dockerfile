@@ -6,16 +6,17 @@ RUN apk add --update --no-cache python3 py3-pip mopidy
 
 RUN python3 -m pip install \
     Mopidy-MPD \
+    Mopidy-Local \
+    Mopidy-Muse \
     Mopidy-Iris \
-    Mopidy-Jellyfin \
     Mopidy-Party
 
-USER mopidy
+RUN echo "0 * * * * mopidy local scan" > /var/spool/cron/crontabs/root
 
-VOLUME [ "/var/lib/mopidy" ]
-VOLUME [ "/tmp" ]
+VOLUME [ "/root" ]
+VOLUME [ "/music" ]
 
 EXPOSE 6600
 EXPOSE 6680
 
-ENTRYPOINT [ "mopidy", "--config", "/var/lib/mopidy/mopidy.conf" ]
+ENTRYPOINT [ "mopidy", "--config", "/root/.config/mopidy/mopidy.conf" ]
