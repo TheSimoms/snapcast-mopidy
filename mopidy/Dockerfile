@@ -11,10 +11,11 @@ RUN python3 -m pip install \
     Mopidy-Iris \
     Mopidy-Party
 
-RUN echo "0 * * * * mopidy local scan" > /var/spool/cron/crontabs/root
+RUN echo "0 * * * * mopidy local scan > /root/local-scan.log" > /var/spool/cron/crontabs/root
 
 VOLUME [ "/root" ]
 VOLUME [ "/music" ]
+VOLUME [ "/playlists" ]
 
 EXPOSE 6600
 EXPOSE 6680
