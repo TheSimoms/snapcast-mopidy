@@ -7,7 +7,6 @@ RUN apk add --update --no-cache python3 py3-pip mopidy
 RUN python3 -m pip install \
     Mopidy-MPD \
     Mopidy-Local \
-    Mopidy-Muse \
     Mopidy-Iris \
     Mopidy-Party
 
