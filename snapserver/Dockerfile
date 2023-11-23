@@ -1,8 +1,7 @@
 FROM alpine:latest
 
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
-
-RUN apk --update --no-cache add snapcast-server librespot
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk --update --no-cache add snapcast-server librespot
 
 EXPOSE 1704
 EXPOSE 1705
